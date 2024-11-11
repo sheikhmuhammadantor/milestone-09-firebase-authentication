@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "../Layout/MainLayout";
+import AuthProvider from "../Providers/AuthProvider";
 import Error from "../Pages/Error";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
@@ -33,7 +34,9 @@ function Routes() {
 
   return (
     <section>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </section>
   )
 }

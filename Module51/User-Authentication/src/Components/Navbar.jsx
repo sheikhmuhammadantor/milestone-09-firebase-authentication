@@ -1,5 +1,7 @@
 import { Link, NavLink } from "react-router-dom"
 import { FaBars } from "react-icons/fa";
+import { useContext } from "react";
+import { AuthContext } from "../Providers/AuthProvider";
 
 function Navbar() {
 
@@ -10,6 +12,8 @@ function Navbar() {
         {/* <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/">Home</NavLink></li> */}
     </>
+
+            const {name} = useContext(AuthContext)
 
     return (
         <section>
@@ -31,7 +35,7 @@ function Navbar() {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <button ><Link className="btn">Sign Out</Link></button>
+                    <button ><Link className="btn">{name}</Link></button>
                 </div>
             </div>
         </section>
