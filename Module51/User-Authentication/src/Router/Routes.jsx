@@ -8,32 +8,32 @@ import Register from "../Pages/Register";
 
 function Routes() {
 
-    const router = createBrowserRouter([
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <MainLayout></MainLayout>,
+      errorElement: <Error></Error>,
+      children: [
         {
           path: "/",
-          element: <MainLayout></MainLayout>,
-          errorElement: <Error></Error>,
-          children: [
-            {
-                path: "/",
-                element: <Home></Home>
-            },
-            {
-                path: "/login",
-                element: <Login></Login>,
-            },
-            {
-              path: "/register",
-              element: <Register></Register>
-            }
-          ]
+          element: <Home></Home>
         },
-      ]);
+        {
+          path: "/login",
+          element: <Login></Login>,
+        },
+        {
+          path: "/register",
+          element: <Register></Register>
+        }
+      ]
+    },
+  ]);
 
 
   return (
     <section>
-        <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </section>
   )
 }
