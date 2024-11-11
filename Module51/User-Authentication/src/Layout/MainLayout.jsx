@@ -4,11 +4,9 @@ import Footer from "../Components/Footer"
 
 function MainLayout() {
   return (
-    <section className="container mx-auto">
+    <section className="container mx-auto flex flex-col justify-between min-h-screen">
       <Navbar></Navbar>
-      <section className="min-h-[70vh]">
-        <Outlet></Outlet>
-      </section>
+      <Outlet></Outlet>
       <Footer></Footer>
     </section>
   )
