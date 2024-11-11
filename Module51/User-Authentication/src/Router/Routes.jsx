@@ -3,6 +3,7 @@ import MainLayout from "../Layout/MainLayout";
 import Error from "../Pages/Error";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
+import Register from "../Pages/Register";
 
 
 function Routes() {
@@ -21,6 +22,10 @@ function Routes() {
                 path: "/login",
                 element: <Login></Login>,
             },
+            {
+              path: "/register",
+              element: <Register></Register>
+            }
           ]
         },
       ]);
