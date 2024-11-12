@@ -17,7 +17,7 @@ function Login() {
       .then(() => {
         toast.success('Successfully Sign In !', {})
         e.target.reset()
-        navigate('/')
+        navigate('/');
       })
       .catch(error => {
         console.log(`ErroR : ${error}`);
@@ -29,6 +29,7 @@ function Login() {
     googleSignIn()
       .then(() => {
         toast.success('Successfully Sign In !', {})
+        navigate('/');
       })
       .catch(error => {
         console.log(`ErroR : ${error}`);
@@ -40,6 +41,7 @@ function Login() {
     GitHubSignIn()
       .then(() => {
         toast.success('Successfully Sign In !', {})
+        navigate('/');
       })
       .catch(error => {
         console.log(`ErroR : ${error}`);

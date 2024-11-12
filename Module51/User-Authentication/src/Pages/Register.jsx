@@ -53,10 +53,10 @@ function Register() {
               <button className="btn btn-primary">Register</button>
               <p className='mt-3'>Already have an Account ? Place <Link to="/login" className='font-semibold hover:underline'>Log In</Link></p>
             </div>
-            <div className='flex justify-between gap-2'>
-                <Link to="/login" className="btn my-2 btn-warning">Register With Google</Link>
-                <Link to="/login" className="btn my-2 btn-accent">Register With GitHub</Link>
-              </div>
+            {/* <div className='flex justify-between gap-2'>
+              <Link to="/login" className="btn my-2 btn-warning">Register With Google</Link>
+              <Link to="/login" className="btn my-2 btn-accent">Register With GitHub</Link>
+            </div> */}
           </form>
         </div>
       </div>
