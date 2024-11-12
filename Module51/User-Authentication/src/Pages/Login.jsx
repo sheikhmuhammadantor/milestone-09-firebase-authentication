@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../Providers/AuthProvider';
 import toast from 'react-hot-toast';
 
 function Login() {
 
-  const { signInUser } = useContext(AuthContext)
+  const { signInUser, googleSignIn, GitHubSignIn } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handelLogIn = (e) => {
     e.preventDefault();
@@ -13,9 +14,32 @@ function Login() {
     const password = e.target.password.value;
 
     signInUser(email, password)
-      .then(result => {
+      .then(() => {
         toast.success('Successfully Sign In !', {})
         e.target.reset()
+        navigate('/')
+      })
+      .catch(error => {
+        console.log(`ErroR : ${error}`);
+        toast.error("Sign In Error !", {})
+      })
+  }
+
+  const handelGoogleLogIn = () => {
+    googleSignIn()
+      .then(() => {
+        toast.success('Successfully Sign In !', {})
+      })
+      .catch(error => {
+        console.log(`ErroR : ${error}`);
+        toast.error("Sign In Error !", {})
+      })
+  }
+
+  const handelGitHubLogIn = () => {
+    GitHubSignIn()
+      .then(() => {
+        toast.success('Successfully Sign In !', {})
       })
       .catch(error => {
         console.log(`ErroR : ${error}`);
@@ -46,9 +70,13 @@ function Login() {
                 <button ><Link href="#" className="label-text-alt link link-hover">Forgot password?</Link></button>
               </label>
             </div>
-            <div className="form-control mt-6">
+            <div className="form-control mt-4">
               <button className="btn btn-primary">Log In</button>
               <p className='mt-3'>Create a new Account ? Place <Link to="/register" className='font-semibold hover:underline'>Register</Link></p>
+              <div className='flex justify-between gap-2'>
+                <Link onClick={handelGoogleLogIn} className="btn my-2 btn-warning">Log In With Google</Link>
+                <Link onClick={handelGitHubLogIn} className="btn my-2 btn-accent">Log In With GitHub</Link>
+              </div>
             </div>
           </form>
         </div>

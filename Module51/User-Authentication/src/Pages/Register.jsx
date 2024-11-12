@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../Providers/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Register() {
 
   const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handelRegister = (e) => {
     e.preventDefault();
@@ -14,7 +15,11 @@ function Register() {
     console.log(name, email, password);
 
     createUser(email, password)
-      .then(result => console.log(result.user))
+      .then(result => {
+        console.log(result.user);
+        e.target.reset()
+        navigate('/')
+      })
       .catch(error => console.log("ErroR : ", error))
   }
 
@@ -48,6 +53,10 @@ function Register() {
               <button className="btn btn-primary">Register</button>
               <p className='mt-3'>Already have an Account ? Place <Link to="/login" className='font-semibold hover:underline'>Log In</Link></p>
             </div>
+            <div className='flex justify-between gap-2'>
+                <Link to="/login" className="btn my-2 btn-warning">Register With Google</Link>
+                <Link to="/login" className="btn my-2 btn-accent">Register With GitHub</Link>
+              </div>
           </form>
         </div>
       </div>
