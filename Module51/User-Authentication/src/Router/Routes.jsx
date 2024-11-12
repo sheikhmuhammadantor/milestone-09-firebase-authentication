@@ -5,6 +5,7 @@ import Error from "../Pages/Error";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import PrivateRoute from "./PrivateRoute";
 
 
 function Routes() {
@@ -26,6 +27,10 @@ function Routes() {
         {
           path: "/register",
           element: <Register></Register>
+        },
+        {
+          path: "/order",
+          element: <PrivateRoute></PrivateRoute>
         }
       ]
     },

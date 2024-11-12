@@ -2,25 +2,24 @@ import { Link, NavLink } from "react-router-dom"
 import { FaBars } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
-import { signOut } from "firebase/auth";
-import { auth } from "../Firebase/firebase";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 
 function Navbar() {
+
+    const { user, signOutUser } = useContext(AuthContext)
 
     const links = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="login">LogIn</NavLink></li>
         <li><NavLink to="register">Register</NavLink></li>
-        {/* <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/">Home</NavLink></li> */}
+        {
+            user && <li><NavLink to="/order">Order</NavLink></li>
+        }
     </>
 
-    const { user } = useContext(AuthContext)
-
-    const signOutUser = () => {
-        signOut(auth)
+    const handelSignOut = () => {
+        signOutUser()
             .then(() => {
                 toast.success('Successfully Sign Out !', {})
             })
@@ -53,8 +52,8 @@ function Navbar() {
                     {
                         user ?
                             <>
-                                <span>{user.email}</span>
-                                <button onClick={signOutUser} ><Link className="btn ml-4">Sign Out</Link></button>
+                                <span>{user?.email}</span>
+                                <button onClick={handelSignOut} ><Link className="btn ml-4">Sign Out</Link></button>
                             </> :
                             <>
                                 <button><Link to="/login" className="btn ml-4">Log In</Link></button>

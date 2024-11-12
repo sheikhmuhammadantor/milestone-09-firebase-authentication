@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../Providers/AuthProvider';
+import toast from 'react-hot-toast';
 
 function Login() {
 
@@ -12,8 +13,14 @@ function Login() {
     const password = e.target.password.value;
 
     signInUser(email, password)
-      .then(result => console.log(result.user))
-      .catch(error => console.log("ErroR : ", error))
+      .then(result => {
+        toast.success('Successfully Sign In !', {})
+        // e.target.reset
+      })
+      .catch(error => {
+        console.log(`ErroR : ${error}`);
+        toast.error("Sign In Error !", {})
+      })
   }
 
   return (
