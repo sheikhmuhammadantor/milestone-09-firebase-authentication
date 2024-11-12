@@ -2,6 +2,10 @@ import { Link, NavLink } from "react-router-dom"
 import { FaBars } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
+import { signOut } from "firebase/auth";
+import { auth } from "../Firebase/firebase";
+import toast from 'react-hot-toast';
+
 
 function Navbar() {
 
@@ -13,7 +17,18 @@ function Navbar() {
         <li><NavLink to="/">Home</NavLink></li> */}
     </>
 
-            const {name} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
+
+    const signOutUser = () => {
+        signOut(auth)
+            .then(() => {
+                toast.success('Successfully Sign Out !', {})
+            })
+            .catch((error) => {
+                console.log(`ErroR : ${error}`);
+                toast.error("Sign Out Error !", {})
+            })
+    }
 
     return (
         <section>
@@ -27,7 +42,7 @@ function Navbar() {
                             {links}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">UserAuthentication</a>
+                    <Link to="/" className="btn btn-ghost text-xl">UserAuthentication</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -35,7 +50,16 @@ function Navbar() {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <button ><Link className="btn">{name}</Link></button>
+                    {
+                        user ?
+                            <>
+                                <span>{user.email}</span>
+                                <button onClick={signOutUser} ><Link className="btn ml-4">Sign Out</Link></button>
+                            </> :
+                            <>
+                                <button><Link to="/login" className="btn ml-4">Log In</Link></button>
+                            </>
+                    }
                 </div>
             </div>
         </section>

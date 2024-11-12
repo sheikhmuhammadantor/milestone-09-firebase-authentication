@@ -41,6 +41,7 @@ function Login() {
             </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Log In</button>
+              <p className='mt-3'>Create a new Account ? Place <Link to="/register" className='font-semibold hover:underline'>Register</Link></p>
             </div>
           </form>
         </div>
