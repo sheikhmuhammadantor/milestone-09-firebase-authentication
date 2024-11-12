@@ -6,6 +6,8 @@ import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import PrivateRoute from "./PrivateRoute";
+import Orders from "../Pages/Orders";
+import Profile from "../Pages/Profile";
 
 
 function Routes() {
@@ -30,7 +32,11 @@ function Routes() {
         },
         {
           path: "/order",
-          element: <PrivateRoute></PrivateRoute>
+          element: <PrivateRoute><Orders></Orders></PrivateRoute>
+        },
+        {
+          path: "/profile",
+          element: <PrivateRoute><Profile></Profile></PrivateRoute>
         }
       ]
     },

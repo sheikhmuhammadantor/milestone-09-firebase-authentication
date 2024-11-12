@@ -14,7 +14,10 @@ function Navbar() {
         <li><NavLink to="login">LogIn</NavLink></li>
         <li><NavLink to="register">Register</NavLink></li>
         {
-            user && <li><NavLink to="/order">Order</NavLink></li>
+            user && <>
+                <li><NavLink to="/order">Order</NavLink></li>
+                <li><NavLink to="/profile">Profile</NavLink></li>
+            </>
         }
     </>
 

@@ -15,7 +15,7 @@ function Login() {
     signInUser(email, password)
       .then(result => {
         toast.success('Successfully Sign In !', {})
-        // e.target.reset
+        e.target.reset()
       })
       .catch(error => {
         console.log(`ErroR : ${error}`);
