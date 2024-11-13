@@ -29,7 +29,7 @@ function Register() {
     const password = e.target.password.value;
 
     if (password.length < 6) {
-      return setError("Password must be 6 or longer.")
+      return setError("Password must be 6 character or longer.")
     }
 
     createUser(email, password)
