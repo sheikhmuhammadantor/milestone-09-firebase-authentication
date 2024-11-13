@@ -15,7 +15,7 @@ function Home() {
             <hr />
             <div className='my-5 flex gap-4 justify-center'>
               <Link to="/order" className='btn outline outline-2 outline-purple-500 shadow-purple-500 shadow-lg'>See Order's</Link>
-              <Link to="/profile" className='btn outline outline-2 outline-cyan-500 shadow-cyan-500 shadow-lg'>View Profile</Link>
+              <Link to="/profile" className='btn outline outline-2 outline-cyan-500 shadow-cyan-500 shadow-lg'>Visit Profile</Link>
             </div>
           </>
           :
