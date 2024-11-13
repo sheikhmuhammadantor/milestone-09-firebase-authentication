@@ -21,7 +21,9 @@ function Home() {
           :
           <>
             <h1 className='text-4xl text-center my-8 py-5 text-cyan-400 bg-gray-950'>You Need to LogIn First !</h1>
-            <button className='btn mx-auto block btn-sm text-cyan-400 px-5 border-2 border-black shadow-2xl text-lg'><Link to="/login">LogIn</Link></button>
+            <button className='mx-auto block'>
+              <Link to="/login" className='btn mx-auto block btn-sm text-cyan-400 px-5 border-2 border-black shadow-2xl text-lg'>LogIn</Link>
+            </button>
           </>
 
       }

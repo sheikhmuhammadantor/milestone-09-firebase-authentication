@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { AuthContext } from '../Providers/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
@@ -11,11 +11,10 @@ function Register() {
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [terms, setTerms] = useState(false);
-  const termsRef = useRef()
 
 
-  const handelTermsChecked = () => {
-    setTerms(termsRef.current?.checked);
+  const handelTermsChange = () => {
+    setTerms(!terms)
   }
 
   const handelShowPassword = () => {
@@ -30,6 +29,13 @@ function Register() {
 
     if (password.length < 6) {
       return setError("Password must be 6 character or longer.")
+    }
+
+    if (!terms) {
+      return toast(`ইউ আর ভেরি চালাক ব্রো`, {
+        icon: '😑',
+        position: "top-center"
+      });
     }
 
     createUser(email, password)
@@ -81,8 +87,8 @@ function Register() {
             </div>
             {/* CheckBox */}
             <div className="form-control">
-              <label onClick={handelTermsChecked} className="cursor-pointer label justify-start">
-                <input type="checkbox" ref={termsRef} name="terms" className="checkbox checkbox-info " />
+              <label className="cursor-pointer label justify-start">
+                <input onChange={handelTermsChange} type="checkbox" name="terms" className="checkbox checkbox-info " />
                 <span className="label-text ml-2">Accept Our <span className='text-base hover:underline font-medium'>Terms & Condition</span></span>
               </label>
             </div>
