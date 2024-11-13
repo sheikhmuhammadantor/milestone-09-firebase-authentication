@@ -1,13 +1,26 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { AuthContext } from '../Providers/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
-// import { FaRegEye } from "react-icons/fa";
+import toast from 'react-hot-toast';
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 function Register() {
 
   const { createUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [terms, setTerms] = useState(false);
+  const termsRef = useRef()
+
+
+  const handelTermsChecked = () => {
+    setTerms(termsRef.current?.checked);
+  }
+
+  const handelShowPassword = () => {
+    setShowPassword(!showPassword);
+  }
 
   const handelRegister = (e) => {
     e.preventDefault();
@@ -15,7 +28,7 @@ function Register() {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    if(password.length < 6) {
+    if (password.length < 6) {
       return setError("Password must be 6 or longer.")
     }
 
@@ -23,6 +36,7 @@ function Register() {
       .then(result => {
         console.log(result.user);
         e.target.reset()
+        toast.success('Successfully Register !', {})
         setError('')
         navigate('/')
       })
@@ -52,19 +66,34 @@ function Register() {
               </label>
               <input type="email" name='email' placeholder="Email" className="input input-bordered" required />
             </div>
-            <div className="form-control">
+            <div className="form-control relative">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
-              <input type="password" name='password' placeholder="Password" className="input input-bordered" required autoComplete="off" />
+              <input
+                type={showPassword ? "text" : "password"}
+                name='password' placeholder="Password" className="input input-bordered" required autoComplete="off" />
+              <span onClick={handelShowPassword} className='btn btn-sm absolute bottom-2 right-2 text-lg'>
+                {
+                  showPassword ? <FaRegEyeSlash /> : <FaRegEye />
+                }
+              </span>
             </div>
-            <div className="form-control mt-6">
-              <button className="btn btn-primary mb-1">Register</button>
+            {/* CheckBox */}
+            <div className="form-control">
+              <label onClick={handelTermsChecked} className="cursor-pointer label justify-start">
+                <input type="checkbox" ref={termsRef} name="terms" className="checkbox checkbox-info " />
+                <span className="label-text ml-2">Accept Our <span className='text-base hover:underline font-medium'>Terms & Condition</span></span>
+              </label>
+            </div>
+            <div className="form-control mt-2">
+              <button disabled={!terms} className="btn btn-primary mb-1 disabled:btn-neutral disabled:opacity-60 disabled:text-gray-500">Register</button>
               {
                 error && <small className='text-red-500'>{error}</small>
               }
               <p className='mt-2'>Already have an Account ? Place <Link to="/login" className='font-semibold hover:underline'>Log In</Link></p>
             </div>
+            {/* Google And GitHub Button */}
             {/* <div className='flex justify-between gap-2'>
               <Link to="/login" className="btn my-2 btn-warning">Register With Google</Link>
               <Link to="/login" className="btn my-2 btn-accent">Register With GitHub</Link>
